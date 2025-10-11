@@ -185,7 +185,7 @@
     #view-instalar .tagline{ font-weight:800; color:#111; margin:0; }
     .btn-with-icon{ display:flex; align-items:center; justify-content:center; gap:10px; }
 
-/* Quitar todo espacio vertical entre vistas y tarjetas */
+    /* Quitar todo espacio vertical entre vistas y tarjetas */
 .container{
   padding-block: 0 !important;       /* sin aire arriba/abajo en el contenedor */
 }
@@ -250,69 +250,35 @@
   border-color: #b91c1c !important;
 }
 
-    /* RESET VERTICAL dentro de vistas: elimina márgenes de elementos comunes */
+/* ===================== FINAL OVERRIDES PARA EL ESPACIO BAJO EL VIDEO ===================== */
+/* 1) Evita alturas forzadas por height:100% del bloque inicial */
+html, body{ height: auto !important; }
+
+/* 2) Elimina cualquier separación vertical residual entre hermanos directos de cada vista */
+.view > * + *{
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* 3) Quita márgenes verticales de elementos tipográficos dentro de vistas */
 .view h1, .view h2, .view h3, .view h4, .view h5, .view h6,
 .view p, .view ul, .view ol, .view dl, .view figure, .view blockquote,
-.view form, .view label, .view textarea, .view input, .view select {
+.view form, .view label, .view textarea, .view input, .view select, .view img{
   margin-block-start: 0 !important;
   margin-block-end: 0 !important;
 }
 
-/* Contenedor principal y vistas sin aire extra */
-.container{ padding-block: 0 !important; }
-.view{
-  padding: 0 !important;
-  margin: 0 !important;
-  min-height: auto !important;
-}
-
-/* Tarjetas pegadas (centradas) sin separación vertical extra */
-.view > .card{ margin: 0 auto !important; }
-.card{ padding-block: 12px !important; }
-
-/* Filas de botones sin márgenes (anula inline) */
-.view .btn-row{ margin: 0 !important; }
-
-/* Bloques finales (brand + copy) sin margen adicional */
+/* 4) Bloques finales: marca y copyright pegados sin salto */
 .view .brand{ margin: 0 auto !important; }
-.view .center.muted{ margin: 0 !important; }
+.view .center.muted{ margin: 0 !important; padding: 0 !important; }
+.brand + .center.muted{ margin-top: 0 !important; }
 
-/* Video sin separación extra */
-.video-card{ margin: 0 auto !important; }
-
-/* Cualquier contenedor interno directo sin empujar altura */
-.view > .narrow{ margin: 0 auto !important; }
-
-/* Asegura que el último hijo de cada vista no aporte espacio extra */
-.view > :last-child{
-  margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-/* Botones superiores como en la referencia */
-#view-menu #btn-open-menu{
-  background: #fff !important;
-  color: #0b3ea7 !important;
-  border: 2px solid var(--primary) !important;
-  box-shadow: 0 6px 12px rgba(0,0,0,.18);
-}
-#view-menu #btn-open-menu:hover{
-  background: var(--primary-2) !important;
-  color: #fff !important;
-  border-color: var(--primary-2) !important;
-}
-#view-menu #btn-logout{
-  background: #dc2626 !important;
-  color: #fff !important;
-  border: 2px solid #dc2626 !important;
-  box-shadow: 0 6px 12px rgba(0,0,0,.18);
-}
-#view-menu #btn-logout:hover{
-  background: #b91c1c !important;
-  border-color: #b91c1c !important;
-}
-    
-  </style>
+/* 5) Video y bloque siguiente sin aire */
+#videoCard{ margin: 0 auto !important; }
+#videoCard + .narrow{ margin: 0 auto !important; }
+#videoCard + .narrow .brand,
+#videoCard + .narrow .center.muted{ margin: 0 !important; }
+</style>
 </head>
 <body>
   <!-- Loader -->
