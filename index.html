@@ -22,6 +22,8 @@
       --ok:#16a34a;
       --error:#dc2626;
       --scrim:rgba(0,0,0,.35);
+      --panel:#2f6bdb;
+      --aqua:#7de3ef;
     }
     html,body{
       margin:0; padding:0; height:100%; width:100%;
@@ -48,9 +50,9 @@
       backdrop-filter: blur(3px);
       border: 2px solid #ddd; border-radius: 10px;
       box-shadow: 0 8px 18px rgba(0,0,0,.15);
-      max-width: 620px; margin: 16px auto; padding: 16px 16px 12px 16px;
+      max-width: 760px; margin: 16px auto; padding: 16px 16px 12px 16px;
     }
-    .narrow{ max-width: 560px; margin: 0 auto; }
+    .narrow{ max-width: 640px; margin: 0 auto; }
     h1,h2{ margin: 8px 0 12px; text-align:center; }
     p.helper{ color:#333; font-size:.95rem; text-align:center; margin:8px 0 16px; }
     label{ display:block; font-weight:800; margin: 12px 0 6px; color:var(--primary); }
@@ -65,7 +67,7 @@
     input:focus, select:focus, textarea:focus{ border-color:var(--primary); }
     button{
       cursor:pointer; border:2px solid var(--primary);
-      background:#fff; color:#000; font-weight:800; border-radius:10px;
+      background:#fff; color:#000; font-weight:800; border-radius:999px;
     }
     button:hover{ background:var(--primary-2); color:#fff; border-color:var(--primary-2); }
     .btn-primary{ background:var(--primary); color:#fff; }
@@ -107,31 +109,39 @@
     .spinner-ios i:nth-child(11) { transform: rotate(300deg) translateY(-24px); animation-delay:-0.1s; }
     .spinner-ios i:nth-child(12) { transform: rotate(330deg) translateY(-24px); animation-delay: 0s; }
 
-    /* Overlay lateral (menú) */
+    /* Overlay lateral (menú): estilo referencia, con aire y copy */
     .overlay{ position: fixed; inset: 0; pointer-events:none; }
     .overlay .scrim{ position:absolute; inset:0; background:var(--scrim); opacity:0; transition:opacity .25s ease; }
     .overlay .panel{
       position:absolute; top:0; left:0; width:min(360px, 90vw); height:100%;
-      background:#2f6bdb; color:#fff; padding:16px 16px 8px 16px; box-sizing:border-box;
+      background:var(--panel); color:#fff; padding:16px; box-sizing:border-box;
       transform: translateX(-100%); transition: transform .25s ease;
-      display:flex; flex-direction:column; gap:10px; overflow-y:auto; min-height:0;
+      display:flex; flex-direction:column; gap:14px; overflow-y:auto; min-height:0;
     }
     .overlay.open{ pointer-events:auto; }
     .overlay.open .scrim{ opacity:1; }
     .overlay.open .panel{ transform: translateX(0); }
-    .panel h3{ margin: 4px 0 8px; text-align:center; }
+    .panel h3{ margin: 0 0 6px; text-align:center; font-weight:900; }
     .menu-btn{
-      background:#7de3ef; color:#000; border:0; font-weight:800;
+      background:var(--aqua); color:#000; border:0; font-weight:800;
       border-radius:999px; padding:12px; box-shadow: 0 6px 12px rgba(0,0,0,.18);
+      margin: 4px 0; /* aire vertical entre botones */
     }
+    .ovl-header{ display:flex; align-items:center; justify-content:center; }
+    .ovl-brand{ max-width:180px; border-radius:10px; display:block; margin: 2px auto 0; }
+    .ovl-copy{ text-align:center; font-size:.9rem; margin-top:4px; }
 
-    /* Avatar Comercio + título en menú */
+    /* Avatar Comercio + título en menú (como “Comerciantes”) */
     .avatar-wrap{ display:flex; flex-direction:column; align-items:center; gap:8px; margin:8px 0; }
     .avatar{
-      width:120px; height:120px; border-radius:12px; object-fit:cover;
-      border:2px solid #ddd; background:#eee; box-shadow: 0 6px 12px rgba(0,0,0,.2);
+      width:150px; height:150px; border-radius:14px; object-fit:cover;
+      border:2px solid #ddd; background:#eee; box-shadow: 0 8px 18px rgba(0,0,0,.2);
     }
-    .c-nombre{ font-weight:900; text-align:center; color:#111; }
+    .c-nombre{
+      font-weight:900; text-align:center; color:#111;
+      font-size:1.35rem; line-height:1.2; text-transform:uppercase;
+      letter-spacing:.3px; margin-top:2px;
+    }
 
     /* Campos con icono al lado (apps) */
     .input-with-icon{ display:flex; gap:10px; align-items:center; }
@@ -159,6 +169,21 @@
     .video-card video, .video-card iframe{ width:100%; height:100%; display:block; }
 
     .hidden{ display:none !important; }
+
+    /* Vista Instalar */
+    #view-instalar{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height: calc(100dvh - 32px);
+      text-align:center;
+    }
+    #view-instalar .install-wrap{
+      display:flex; flex-direction:column; align-items:center; gap:12px; padding:8px;
+    }
+    #view-instalar .brand{ width:220px; border-radius:8px; }
+    #view-instalar .tagline{ font-weight:800; color:#111; margin:0; }
+    .btn-with-icon{ display:flex; align-items:center; justify-content:center; gap:10px; }
   </style>
 </head>
 <body>
@@ -321,7 +346,7 @@
         </div>
       </div>
 
-      <!-- Video de bienvenida (opcional, igual que el portal base) -->
+      <!-- Video de bienvenida -->
       <div class="video-card" id="videoCard">
         <img id="videoThumb" class="video-thumb" src="https://res.cloudinary.com/dqqeavica/image/upload/v1759802023/Miniatura_ilkloy.png" alt="Video miniatura">
         <div class="play-layer" id="playLayer">▶</div>
@@ -333,22 +358,27 @@
       </div>
     </section>
 
-    <!-- OVERLAY (menú lateral) -->
+    <!-- OVERLAY (menú lateral, estilo referencia) -->
     <div class="overlay" id="overlay">
       <div class="scrim" id="ovlClose"></div>
       <aside class="panel">
         <div class="btn-row">
-          <button id="btn-ovl-back">ATRÁS</button>
+          <button id="btn-ovl-back" style="background:#fff; color:#000;">ATRÁS</button>
         </div>
-        <div class="narrow">
-          <h3>Selecciona una opción</h3>
-          <button class="menu-btn" id="go-politicas">Políticas de Uso</button>
-          <button class="menu-btn" id="go-actualiza">Actualiza tus Datos</button>
-          <button class="menu-btn" id="go-validar">Validar Usuario</button>
-          <button class="menu-btn" id="go-descargar">Descarga la App Jhonny Perdomo</button>
+
+        <div class="ovl-header">
+          <img class="ovl-brand" alt="banner" src="https://res.cloudinary.com/dqqeavica/image/upload/v1759696513/Jhonny_y1tslf.gif" />
         </div>
-        <div style="height:24px"></div>
+
+        <h3>Selecciona una opción</h3>
+        <button class="menu-btn" id="go-politicas">Políticas de Uso</button>
+        <button class="menu-btn" id="go-actualiza">Actualiza tus Datos</button>
+        <button class="menu-btn" id="go-validar">Validar Usuario</button>
+        <button class="menu-btn" id="go-descargar">Descarga la App Jhonny Perdomo</button>
+        <button class="menu-btn" id="btn-instalar" style="display:none;">Instalar la App 📲</button>
+
         <img class="brand" alt="Brand" src="https://res.cloudinary.com/dqqeavica/image/upload/v1753538919/BANNER_JHONNY_e0yw7m.png" />
+        <p class="ovl-copy">Copyright © <a href="https://wa.me/573103230712" target="_blank" style="color:#fff;"><b>Oscar Polanía</b></a></p>
       </aside>
     </div>
 
@@ -476,11 +506,24 @@
       </div>
     </section>
 
+    <!-- VISTA: INSTALAR APP (como referencia) -->
+    <section id="view-instalar" class="view">
+      <div class="install-wrap">
+        <h2 style="color:var(--primary); text-shadow: 0 2px 2px #031732; margin: 0 0 8px;">PORTAL COMERCIAL</h2>
+        <img class="brand" alt="App" src="https://res.cloudinary.com/dqqeavica/image/upload/v1759696513/Jhonny_y1tslf.gif" />
+        <p class="tagline">#SoyDeFlandes</p>
+        <p class="tagline">#NoParamos</p>
+        <p class="tagline">#SiemprePresentes</p>
+        <div class="btn-row spaced" style="max-width:420px; width:100%; justify-content:center;">
+          <button class="btn-primary" id="btn-instalar-standalone">Instalar la App 📲</button>
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <script>
     // URL de tu Apps Script desplegado (el nuevo para Portal Comercial)
-    // Reemplaza con tu propia URL al desplegar
     const API_BASE = 'https://script.google.com/macros/s/AKfycbx3HZ2jHN6P0-TOAfNfvzYJYPfRMzR-pK7kSrbWxmH8eUlo_AlZae85kv2Kietxv-M/exec';
 
     // Sonidos
@@ -496,19 +539,13 @@
       menu: 'https://res.cloudinary.com/dqqeavica/video/upload/v1759011577/Namedrop_Popup_ale2zy.mp3',
       back: 'https://res.cloudinary.com/dqqeavica/video/upload/v1759011578/Keyboard_Enter_b9k2dc.mp3'
     };
-    function playSoundOnce(url){
-      try{ const a = new Audio(url); a.preload='auto'; a.play().catch(()=>{}); }catch(_){}
-    }
+    function playSoundOnce(url){ try{ const a = new Audio(url); a.preload='auto'; a.play().catch(()=>{}); }catch(_){ } }
     if (window.Swal && typeof Swal.fire === 'function'){
       const __fire = Swal.fire.bind(Swal);
       Swal.fire = function(options = {}, ...rest){
         try{
-          if (options.soundTag === 'resumen'){
-            playSoundOnce(SOUNDS.resumen);
-          }else{
-            const icon = options.icon || options.type;
-            if (icon && SOUNDS[icon]) playSoundOnce(SOUNDS[icon]);
-          }
+          if (options.soundTag === 'resumen'){ playSoundOnce(SOUNDS.resumen); }
+          else{ const icon = options.icon || options.type; if (icon && SOUNDS[icon]) playSoundOnce(SOUNDS[icon]); }
         }catch(_){}
         return __fire(options, ...rest);
       }
@@ -532,7 +569,7 @@
       }
     }
 
-    // Helpers fetch
+    // Fetch helpers
     async function apiGet(action, params = {}){
       startLoading();
       try{
@@ -573,7 +610,6 @@
     // Choices para selects
     let choicesRegCat = null, choicesUpdCat = null;
     function initChoicesSelects(){
-      // Registro
       const selR = document.getElementById('reg-categoria');
       if (choicesRegCat) { try{ choicesRegCat.destroy(); }catch(_){ } choicesRegCat = null; }
       if (selR){
@@ -583,7 +619,6 @@
           searchPlaceholderValue: 'Escribe para filtrar'
         });
       }
-      // Actualiza
       const selU = document.getElementById('upd-categoria');
       if (choicesUpdCat) { try{ choicesUpdCat.destroy(); }catch(_){ } choicesUpdCat = null; }
       if (selU){
@@ -596,7 +631,7 @@
     }
     document.addEventListener('DOMContentLoaded', initChoicesSelects);
 
-    // Mapeo Categorías -> Especificaciones
+    // Categorías -> Especificaciones
     const CATEGORIAS = [
       { cat: 'Alimentos y Bebidas', spec: 'Restaurantes familiares, Comidas rápidas, Cafeterías, Panaderías, Heladerías, Juguerías, Fruterías, Pizzerías, Asaderos, Tiendas naturistas, Productos saludables, Venta ambulante de comidas, Corrientazos, Venta de jugos, Empanadas, Arepas, Buñuelos, Chorizos, Pinchos, Mazorcas, Venta de Cerveza' },
       { cat: 'Belleza, Cuidado Personal y Estética', spec: 'Peluquerías, Barberías, Manicure, Pedicure, Uñas acrílicas, Spa de manos y pies, Centros de estética, Depilación, Maquillaje profesional, Venta de cosméticos, Perfumerías, Masajes, Terapias relajantes' },
@@ -623,72 +658,49 @@
       if (r){
         r.innerHTML = '<option value="" disabled selected>Selecciona tu Categoría</option>';
         for(const it of CATEGORIAS){
-          const op = document.createElement('option');
-          op.value = it.cat; op.textContent = it.cat;
-          r.appendChild(op);
+          const op = document.createElement('option'); op.value = it.cat; op.textContent = it.cat; r.appendChild(op);
         }
       }
       if (u){
         u.innerHTML = '<option value="" selected>Sin cambios</option>';
         for(const it of CATEGORIAS){
-          const op = document.createElement('option');
-          op.value = it.cat; op.textContent = it.cat;
-          u.appendChild(op);
+          const op = document.createElement('option'); op.value = it.cat; op.textContent = it.cat; u.appendChild(op);
         }
       }
       initChoicesSelects();
     }
     document.addEventListener('DOMContentLoaded', fillCategoriaSelects);
 
-    function specFor(cat){
-      const f = CATEGORIAS.find(x => x.cat === cat);
-      return f ? f.spec : '';
-    }
+    function specFor(cat){ const f = CATEGORIAS.find(x => x.cat === cat); return f ? f.spec : ''; }
 
     // Smart links (Maps, FB, IG, TikTok)
     (function setSmartLinks(){
       const ua = navigator.userAgent || navigator.vendor || window.opera || '';
       const isAndroid = /android/i.test(ua);
-      const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
       const links = {
         maps:      { android:'https://play.google.com/store/apps/details?id=com.google.android.apps.maps', ios:'https://apps.apple.com/app/google-maps/id585027354' },
         facebook:  { android:'https://play.google.com/store/apps/details?id=com.facebook.katana',         ios:'https://apps.apple.com/app/facebook/id284882215' },
         instagram: { android:'https://play.google.com/store/apps/details?id=com.instagram.android',       ios:'https://apps.apple.com/app/instagram/id389801252' },
         tiktok:    { android:'https://play.google.com/store/apps/details?id=com.zhiliaoapp.musically',    ios:'https://apps.apple.com/app/tiktok/id835599320' }
       };
-      const set = (id, pair) => {
-        const el = document.getElementById(id);
-        if (el) el.href = isAndroid ? pair.android : pair.ios;
-      };
-      set('mapsLink', links.maps);
-      set('facebookLink', links.facebook);
-      set('instagramLink', links.instagram);
-      set('tiktokLink', links.tiktok);
-
-      set('mapsLink2', links.maps);
-      set('facebookLink2', links.facebook);
-      set('instagramLink2', links.instagram);
-      set('tiktokLink2', links.tiktok);
+      const set = (id, pair) => { const el = document.getElementById(id); if (el) el.href = isAndroid ? pair.android : pair.ios; };
+      ['mapsLink','facebookLink','instagramLink','tiktokLink','mapsLink2','facebookLink2','instagramLink2','tiktokLink2']
+        .forEach((id)=>{
+          const key = id.includes('maps')?'maps':id.includes('facebook')?'facebook':id.includes('instagram')?'instagram':'tiktok';
+          set(id, links[key]);
+        });
     })();
 
-    // Previsualización y base64 de imágenes (registro/actualiza)
+    // Previsualización y base64 de imágenes
     let regFotoDataUrl = '';
     document.getElementById('reg-foto')?.addEventListener('change', function(e){
       const file = e.target.files && e.target.files[0];
       const preview = document.getElementById('reg-preview');
       if (file){
         const reader = new FileReader();
-        reader.onload = ev => {
-          regFotoDataUrl = ev.target.result;
-          preview.src = regFotoDataUrl;
-          preview.style.display = 'block';
-        };
+        reader.onload = ev => { regFotoDataUrl = ev.target.result; preview.src = regFotoDataUrl; preview.style.display = 'block'; };
         reader.readAsDataURL(file);
-      }else{
-        regFotoDataUrl = '';
-        preview.src = '';
-        preview.style.display = 'none';
-      }
+      }else{ regFotoDataUrl=''; preview.src=''; preview.style.display='none'; }
     });
     let updFotoDataUrl = '';
     document.getElementById('upd-foto')?.addEventListener('change', function(e){
@@ -696,18 +708,28 @@
       const preview = document.getElementById('upd-preview');
       if (file){
         const reader = new FileReader();
-        reader.onload = ev => {
-          updFotoDataUrl = ev.target.result;
-          preview.src = updFotoDataUrl;
-          preview.style.display = 'block';
-        };
+        reader.onload = ev => { updFotoDataUrl = ev.target.result; preview.src = updFotoDataUrl; preview.style.display = 'block'; };
         reader.readAsDataURL(file);
-      }else{
-        updFotoDataUrl = '';
-        preview.src = '';
-        preview.style.display = 'none';
-      }
+      }else{ updFotoDataUrl=''; preview.src=''; preview.style.display='none'; }
     });
+
+    // Helpers imagen estilo "Comerciantes"
+    function driveThumb(url){
+      const m = String(url||'').match(/[-\w]{25,}/);
+      return m ? `https://drive.google.com/thumbnail?sz=w1000&id=${m[0]}` : String(url||'');
+    }
+    function toDisplayImage(src){
+      if (!src) return '';
+      if (/^data:/i.test(src)) return src;        // optimista base64
+      return driveThumb(src);                      // Drive -> miniatura
+    }
+    function setAvatar(src){
+      const img = document.getElementById('c-thumb');
+      const fallback = 'https://res.cloudinary.com/dqqeavica/image/upload/v1759798601/noticias_dax8sd.jpg';
+      img.loading = 'lazy';
+      img.src = toDisplayImage(src) || fallback;
+      img.onerror = ()=>{ img.src = fallback; };
+    }
 
     // Video
     const videoCard = document.getElementById('videoCard');
@@ -725,9 +747,7 @@
       videoCard.classList.add('playing');
       currentVideo = video;
       const p = video.play();
-      if (p && typeof p.then === 'function'){
-        p.catch(()=>{ video.muted=true; video.play().catch(()=>{}); });
-      }
+      if (p && typeof p.then === 'function'){ p.catch(()=>{ video.muted=true; video.play().catch(()=>{}); }); }
       video.addEventListener('ended', stopVideoPlayback);
     }
     function stopVideoPlayback(){
@@ -762,7 +782,7 @@
       window.open((esMovil ? "whatsapp://send?text=" : "https://api.whatsapp.com/send?text=") + enc, "_blank");
     });
 
-    // Rellenar especificaciones onChange
+    // Especificaciones onChange
     document.getElementById('reg-categoria')?.addEventListener('change', (e)=>{
       document.getElementById('reg-especificaciones').value = specFor(e.target.value) || '';
     });
@@ -773,8 +793,9 @@
     // Render menú comercio
     function renderMenuComercio(){
       const d = currentComercio || {};
-      document.getElementById('c-thumb').src = d.imagen || 'https://res.cloudinary.com/dqqeavica/image/upload/v1759798601/noticias_dax8sd.jpg';
-      document.getElementById('c-nombre').textContent = d.nombre || '';
+      setAvatar(d.imagen);
+      const nameEl = document.getElementById('c-nombre');
+      nameEl.textContent = d.nombre || '';
       document.getElementById('c-estado').textContent = d.estado || '';
       document.getElementById('c-direccion').textContent = d.direccion || '';
       document.getElementById('c-nit').textContent = d.documento || '';
@@ -791,7 +812,6 @@
         if(!doc) return;
         const res = await apiGet('validarDocumento', { documento: doc });
         if(res?.existe){
-          // El backend para COMERCIO debe devolver estos campos
           currentComercio = {
             documento: res.documento,
             categoria: res.categoria || '',
@@ -815,8 +835,8 @@
     }
 
     // Validadores
-    const docRegex = /^(?:[0-9]{6,9}|1[0-9]{9})$/; // igual portal base
-    const waRegex = /^[0-9]{10}$/; // 10 dígitos
+    const docRegex = /^(?:[0-9]{6,9}|1[0-9]{9})$/;
+    const waRegex = /^[0-9]{10}$/;
     const urlMapsOk = (u)=> /^https:\/\/(maps\.app\.goo\.gl|goo\.gl\/maps|www\.google\.[^\/]+\/maps)/i.test(u);
     const urlFacebookOk = (u)=> /^https:\/\/(www\.)?facebook\.com\//i.test(u);
     const urlInstagramOk = (u)=> /^https:\/\/(www\.)?instagram\.com\//i.test(u);
@@ -837,7 +857,6 @@
       }
 
       try{
-        // Validar existencia + estado (COMERCIO: hoja "COMERCIO")
         const [res, est] = await Promise.all([
           apiGet('validarDocumento', { documento }),
           apiGet('validarestado', { documento })
@@ -850,7 +869,6 @@
             return;
           }
 
-          // Crear sesión y mostrar menú
           currentComercio = {
             documento: res.documento,
             categoria: res.categoria || '',
@@ -872,7 +890,6 @@
           playSoundOnce(SOUNDS.login);
           showView('view-menu');
         }else{
-          // No existe: mostrar registro
           regCard.style.display = '';
           Swal.fire({ icon:'info', title:'Nuevo Comercio', text:'Completa tu registro para continuar.' });
         }
@@ -889,7 +906,7 @@
       showView('view-login');
     });
 
-    // Guardar Registro (con ACTUALIZACIÓN OPTIMISTA de la imagen y datos)
+    // Guardar Registro (optimista)
     document.getElementById('btn-guardar-registro')?.addEventListener('click', async ()=>{
       const documento = (docLogin.value || '').trim();
       const categoria = (document.getElementById('reg-categoria').value || '').trim();
@@ -905,20 +922,15 @@
       const whatsapp = (document.getElementById('reg-whatsapp').value || '').trim();
       const telefono = (document.getElementById('reg-telefono').value || '').trim();
 
-      // Validaciones básicas
-      if (!docRegex.test(documento)){
-        return Swal.fire({ icon:'warning', title:'Documento inválido', text:'Revisa el documento.' });
-      }
+      if (!docRegex.test(documento)){ return Swal.fire({ icon:'warning', title:'Documento inválido' }); }
       if (!categoria){ return Swal.fire({ icon:'warning', title:'Categoría requerida' }); }
       if (!nombre){ return Swal.fire({ icon:'warning', title:'Nombre requerido' }); }
       if (!descripcion){ return Swal.fire({ icon:'warning', title:'Descripción requerida' }); }
       if (!regFotoDataUrl){ return Swal.fire({ icon:'warning', title:'Imagen requerida' }); }
       if (!direccion){ return Swal.fire({ icon:'warning', title:'Dirección requerida' }); }
       if (!oferta){ return Swal.fire({ icon:'warning', title:'Oferta requerida' }); }
-      if (!waRegex.test(whatsapp)){ return Swal.fire({ icon:'warning', title:'WhatsApp inválido', text:'Debe tener exactamente 10 dígitos.' }); }
-
-      // Validaciones URL opcionales (si tienen dato)
-      if (ubicacion && !urlMapsOk(ubicacion)) return Swal.fire({ icon:'warning', title:'Ubicación inválida', text:'Debe ser enlace de Google Maps válido.' });
+      if (!waRegex.test(whatsapp)){ return Swal.fire({ icon:'warning', title:'WhatsApp inválido', text:'Debe tener 10 dígitos.' }); }
+      if (ubicacion && !urlMapsOk(ubicacion)) return Swal.fire({ icon:'warning', title:'Ubicación inválida' });
       if (facebook && !urlFacebookOk(facebook)) return Swal.fire({ icon:'warning', title:'Facebook inválido' });
       if (instagram && !urlInstagramOk(instagram)) return Swal.fire({ icon:'warning', title:'Instagram inválido' });
       if (tiktok && !urlTiktokOk(tiktok)) return Swal.fire({ icon:'warning', title:'TikTok inválido' });
@@ -945,55 +957,29 @@
       });
       if (!rs.isConfirmed) return;
 
-      // Normaliza opcionales vacíos a ' ' (espacio)
       const opt = (v)=> v ? v : ' ';
 
       try{
         const payload = {
-          documento,
-          categoria,
-          especificaciones,
-          nombre,
-          descripcion,
-          foto: regFotoDataUrl,        // dataURL para que GS suba a Drive
-          urlImagen: '',               // opcional (GS la llenará)
-          direccion,
-          ubicacion: opt(ubicacion),
-          oferta,
-          facebook: opt(facebook),
-          instagram: opt(instagram),
-          tiktok: opt(tiktok),
-          whatsapp,
-          telefono: opt(telefono)
+          documento, categoria, especificaciones, nombre, descripcion,
+          foto: regFotoDataUrl, urlImagen: '',
+          direccion, ubicacion: opt(ubicacion), oferta,
+          facebook: opt(facebook), instagram: opt(instagram), tiktok: opt(tiktok),
+          whatsapp, telefono: opt(telefono)
         };
         const r = await apiPost('guardarComercioEnServidor', payload);
         if (r && r.success){
-          // OPTIMISTA: reflejar de inmediato la imagen y datos en el menú
           currentComercio = {
-            documento,
-            categoria,
-            especificaciones,
-            nombre,
-            descripcion,
-            imagen: regFotoDataUrl, // dataURL temporal
-            oferta,
-            direccion,
-            ubicacion: opt(ubicacion),
-            facebook: opt(facebook),
-            instagram: opt(instagram),
-            tiktok: opt(tiktok),
-            whatsapp,
-            telefono: opt(telefono),
-            estado: 'ACTIVO'
+            documento, categoria, especificaciones, nombre, descripcion,
+            imagen: regFotoDataUrl, oferta, direccion,
+            ubicacion: opt(ubicacion), facebook: opt(facebook), instagram: opt(instagram), tiktok: opt(tiktok),
+            whatsapp, telefono: opt(telefono), estado: 'ACTIVO'
           };
           renderMenuComercio();
           playSoundOnce(SOUNDS.login);
           regCard.style.display='none';
           showView('view-menu');
-
-          // En segundo plano: revalidar para obtener URL real de Drive
-          refreshComercioFromServer();
-
+          refreshComercioFromServer(); // trae URL real de Drive
         }else{
           Swal.fire({ icon:'error', title:'Error al guardar', html:r?.message || 'Error desconocido' });
         }
@@ -1030,28 +1016,17 @@
     document.getElementById('btn-actualiza-volver')?.addEventListener('click', ()=> showView('view-menu'));
     document.getElementById('btn-validar-volver')?.addEventListener('click', ()=> showView('view-menu'));
 
-    // Preparar actualización (pre-cargar documento oculto y limpiar campos)
+    // Preparar actualización
     async function prepararActualiza(){
       if(!currentComercio) return;
       document.getElementById('upd-documento').value = currentComercio.documento || '';
-      document.getElementById('upd-categoria').value = '';
+      ['upd-categoria','upd-especificaciones','upd-nombre','upd-descripcion','upd-direccion','upd-ubicacion','upd-oferta','upd-facebook','upd-instagram','upd-tiktok','upd-whatsapp','upd-telefono']
+        .forEach(id=>{ const el = document.getElementById(id); if(!el) return; el.value = ''; });
       if (choicesUpdCat) choicesUpdCat.setChoiceByValue('');
-      document.getElementById('upd-especificaciones').value = '';
-      document.getElementById('upd-nombre').value = '';
-      document.getElementById('upd-descripcion').value = '';
-      document.getElementById('upd-direccion').value = '';
-      document.getElementById('upd-ubicacion').value = '';
-      document.getElementById('upd-oferta').value = '';
-      document.getElementById('upd-facebook').value = '';
-      document.getElementById('upd-instagram').value = '';
-      document.getElementById('upd-tiktok').value = '';
-      document.getElementById('upd-whatsapp').value = '';
-      document.getElementById('upd-telefono').value = '';
-      updFotoDataUrl = '';
-      const p = document.getElementById('upd-preview'); if (p){ p.src=''; p.style.display='none'; }
+      updFotoDataUrl=''; const p = document.getElementById('upd-preview'); if (p){ p.src=''; p.style.display='none'; }
     }
 
-    // Guardar actualización (solo campos llenos) + OPTIMISTA DE IMAGEN Y CAMPOS
+    // Guardar actualización (optimista)
     document.getElementById('btn-guardar-actualiza')?.addEventListener('click', async ()=>{
       const documento = (document.getElementById('upd-documento').value || '').trim();
       if (!docRegex.test(documento)) return Swal.fire({ icon:'warning', title:'Documento inválido' });
@@ -1069,8 +1044,7 @@
       const whatsapp = (document.getElementById('upd-whatsapp').value || '').trim();
       const telefono = (document.getElementById('upd-telefono').value || '').trim();
 
-      // Validaciones condicionales
-      if (whatsapp && !waRegex.test(whatsapp)) return Swal.fire({ icon:'warning', title:'WhatsApp inválido', text:'Debe tener 10 dígitos.' });
+      if (whatsapp && !/^[0-9]{10}$/.test(whatsapp)) return Swal.fire({ icon:'warning', title:'WhatsApp inválido' });
       if (ubicacion && !urlMapsOk(ubicacion)) return Swal.fire({ icon:'warning', title:'Ubicación inválida' });
       if (facebook && !urlFacebookOk(facebook)) return Swal.fire({ icon:'warning', title:'Facebook inválido' });
       if (instagram && !urlInstagramOk(instagram)) return Swal.fire({ icon:'warning', title:'Instagram inválido' });
@@ -1098,7 +1072,6 @@
       });
       if (!rs.isConfirmed) return;
 
-      // Construir payload solo con campos no vacíos
       const body = { documento };
       if (categoria) { body.categoria = categoria; body.especificaciones = especificaciones || specFor(categoria) || ' '; }
       if (nombre) body.nombre = nombre;
@@ -1111,17 +1084,13 @@
       if (tiktok) body.tiktok = tiktok;
       if (whatsapp) body.whatsapp = whatsapp;
       if (telefono) body.telefono = telefono;
-      if (updFotoDataUrl) body.foto = updFotoDataUrl; // nueva imagen
+      if (updFotoDataUrl) body.foto = updFotoDataUrl;
 
       try{
         const r = await apiPost('actualizarComercioEnServidor', body);
         if (r && r.success){
-          // OPTIMISTA: reflejar cambios locales sin esperar al servidor
           if (!currentComercio) currentComercio = { documento };
-          if (categoria){
-            currentComercio.categoria = categoria;
-            currentComercio.especificaciones = especificaciones || specFor(categoria) || currentComercio.especificaciones || '';
-          }
+          if (categoria){ currentComercio.categoria = categoria; currentComercio.especificaciones = especificaciones || specFor(categoria) || currentComercio.especificaciones || ''; }
           if (nombre) currentComercio.nombre = nombre;
           if (descripcion) currentComercio.descripcion = descripcion;
           if (direccion) currentComercio.direccion = direccion;
@@ -1132,14 +1101,11 @@
           if (tiktok) currentComercio.tiktok = tiktok;
           if (whatsapp) currentComercio.whatsapp = whatsapp;
           if (telefono) currentComercio.telefono = telefono;
-          if (updFotoDataUrl) currentComercio.imagen = updFotoDataUrl; // dataURL temporal
-
+          if (updFotoDataUrl) currentComercio.imagen = updFotoDataUrl; // optimista
           renderMenuComercio();
+
           await Swal.fire({ icon:'success', title:'Actualización exitosa', timer:1200, showConfirmButton:false });
-
-          // En segundo plano: revalidar para traer URL de Drive y datos finales
-          refreshComercioFromServer();
-
+          refreshComercioFromServer(); // traer URL de Drive y refrescar avatar
           showView('view-menu');
         }else{
           Swal.fire({ icon:'error', title:'Error al guardar', text:r?.message || 'Error desconocido' });
@@ -1157,7 +1123,6 @@
       }
       try{
         const r = await apiGet('validarUsuario', { documento });
-        // El backend devolverá { existe:true/false, estado:'ACTIVO/INACTIVO' } o equivalentes
         if (!r || r.existe === false){
           await Swal.fire({ icon:'error', title:'Usuario no Existente', timer:5000, showConfirmButton:false });
           return;
@@ -1175,10 +1140,101 @@
       }
     });
 
-    // Instalación PWA (mínimo) + SW
+    /* PWA: instalar + detección (similar a la referencia) */
+    let deferredPrompt = null;
+    const installButtons = Array.from(document.querySelectorAll('#btn-instalar, #btn-instalar-standalone'));
+
+    function isStandalone(){
+      const dmStandalone = window.matchMedia('(display-mode: standalone)').matches;
+      const iosStandalone = (window.navigator.standalone === true);
+      const dmInstalled = window.matchMedia('(display-mode: installed)').matches;
+      return dmStandalone || iosStandalone || dmInstalled;
+    }
+    function isIOS(){ return /(iphone|ipad|ipod)/i.test(navigator.userAgent || ''); }
+    function isMarkedInstalled(){ try{ return localStorage.getItem('appInstalled') === '1'; }catch(_){ return false; } }
+    function markInstalled(){ try{ localStorage.setItem('appInstalled', '1'); }catch(_){ } }
+    function clearInstalledMark(){ try{ localStorage.removeItem('appInstalled'); }catch(_){ } }
+
+    async function detectInstalled(){
+      if (isStandalone()) return true;
+
+      if (typeof navigator.getInstalledRelatedApps === 'function'){
+        try{
+          const apps = await navigator.getInstalledRelatedApps();
+          // Si existe alguna relacionada como webapp, lo consideramos instalado (tolerante).
+          const found = Array.isArray(apps) && apps.some(a => a && a.platform === 'webapp');
+          if (found){ markInstalled(); return true; }
+          else{ clearInstalledMark(); }
+        }catch(_){}
+      }
+      return isMarkedInstalled();
+    }
+
+    function updateInstallButtonsVisibility(){
+      const installedFlag = isMarkedInstalled();
+      const shouldShow = !isStandalone() && !installedFlag && (isIOS() || !!deferredPrompt);
+      installButtons.forEach(btn => { if (btn) btn.style.display = shouldShow ? '' : 'none'; });
+    }
+
+    window.addEventListener('beforeinstallprompt', (e)=>{
+      e.preventDefault();
+      deferredPrompt = e;
+      updateInstallButtonsVisibility();
+    });
+
+    window.addEventListener('appinstalled', ()=>{
+      markInstalled();
+      updateInstallButtonsVisibility();
+    });
+
+    installButtons.forEach(btn=>{
+      if (!btn) return;
+      btn.addEventListener('click', async ()=>{
+        if (isIOS()){
+          return Swal.fire({
+            icon:'info',
+            title:'Instalar en iPhone/iPad',
+            html:'1) Toca Compartir (cuadro con flecha).<br>2) Elige "Agregar a pantalla de inicio".<br>3) Confirma "Agregar".'
+          });
+        }
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        if (choice.outcome === 'accepted'){
+          markInstalled();
+          Swal.fire({ icon:'success', title:'¡App instalándose!', timer:2000, showConfirmButton:false });
+        }
+        updateInstallButtonsVisibility();
+      });
+    });
+
+    // #instalar: mostrar vista instalación primero; si ya está instalada, volver a login
+    (function(){
+      let installRedirectTimer = null;
+      async function openOrInstall(){
+        if (location.hash !== '#instalar') return;
+        try{ overlay.classList.remove('open'); }catch(_){}
+        showView('view-instalar');
+        const installed = await detectInstalled();
+
+        if (installRedirectTimer){ clearTimeout(installRedirectTimer); installRedirectTimer = null; }
+
+        if (installed){
+          installRedirectTimer = setTimeout(()=>{ showView('view-login'); }, 2000);
+        } else {
+          updateInstallButtonsVisibility();
+        }
+      }
+      window.addEventListener('load', openOrInstall);
+      window.addEventListener('hashchange', openOrInstall);
+    })();
+
+    // PWA SW
     if ('serviceWorker' in navigator){
       window.addEventListener('load', ()=>{ navigator.serviceWorker.register('./sw.js').catch(()=>{}); });
     }
+
   </script>
 </body>
 </html>
