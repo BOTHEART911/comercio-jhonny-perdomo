@@ -185,36 +185,48 @@
     #view-instalar .tagline{ font-weight:800; color:#111; margin:0; }
     .btn-with-icon{ display:flex; align-items:center; justify-content:center; gap:10px; }
 
-   /* Compactar vistas: sin espacios verticales extra y altura según contenidos */
-.container{ padding-block: 8px; }             /* menos aire arriba/abajo */
-.view{ padding: 0; margin: 0; }               /* sin padding ni márgenes en la vista */
-.view > *{ margin-block: 0; }                 /* elimina márgenes verticales heredados */
-.view > .card{ margin: 8px auto; }            /* aire mínimo entre tarjetas */
-.view > .card:first-child{ margin-top: 0; }   /* sin espacio arriba */
-.view > .card:last-child{ margin-bottom: 0; } /* sin espacio abajo */
-
-/* Las tarjetas se ajustan al contenido sin añadir altura extra */
-.card{ padding-block: 12px; }
-
-/* Contenedores internos sin empujar altura extra */
-.narrow{ margin: 0 auto; }
-
-/* La vista de instalar también se compacta (sin min-height forzado) */
-#view-instalar{ min-height: auto; }
-    
-    /* Compactar vistas: sin espacios verticales extra */
-.container{ padding-block: 0 !important; }        /* sin aire arriba/abajo */
+/* Quitar todo espacio vertical entre vistas y tarjetas */
+.container{
+  padding-block: 0 !important;       /* sin aire arriba/abajo en el contenedor */
+}
 .view{
   padding: 0 !important;
   margin: 0 !important;
-  min-height: auto !important;                     /* altura solo según contenido */
+  min-height: auto !important;        /* altura exacta al contenido */
 }
-.view > *{ margin-block: 0 !important; }
-.view > .card{ margin: 0 auto !important; }        /* sin separación entre tarjetas */
-.card{ padding-block: 12px; }                      /* conserva respiración interna */
-.narrow{ margin: 0 auto; }                         /* sin empujar altura externa */
+.view > *{
+  margin-block: 0 !important;         /* sin márgenes superiores/inferiores entre hijos directos */
+}
+.view > .card{
+  margin: 0 auto !important;          /* tarjeta pegada, centrada, sin margen vertical */
+}
 
-/* Botones superiores del menú (vista MENÚ) */
+/* Elimina márgenes inline en filas de botones (incluye el margin-bottom:12px inline) */
+.view .btn-row{
+  margin: 0 !important;
+}
+#view-menu .btn-row{
+  margin: 0 !important;
+}
+
+/* La tarjeta conserva un poco de respiración interna */
+.card{
+  padding-block: 12px !important;
+}
+
+/* Evitar que contenedores internos introduzcan altura extra */
+.narrow{
+  margin: 0 auto !important;
+}
+
+/* Vista Instalar sin altura forzada */
+#view-instalar{
+  min-height: auto !important;
+}
+
+/* Botones superiores como la referencia: 
+   - MENÚ: blanco, borde azul
+   - Cerrar Sesión: rojo */
 #view-menu #btn-open-menu{
   background: #fff !important;
   color: #0b3ea7 !important;
@@ -228,13 +240,13 @@
 }
 
 #view-menu #btn-logout{
-  background: #dc2626 !important;                  /* rojo referencia */
+  background: #dc2626 !important;     /* rojo */
   color: #fff !important;
   border: 2px solid #dc2626 !important;
   box-shadow: 0 6px 12px rgba(0,0,0,.18);
 }
 #view-menu #btn-logout:hover{
-  background: #b91c1c !important;                  /* rojo más oscuro al hover */
+  background: #b91c1c !important;     /* rojo más oscuro */
   border-color: #b91c1c !important;
 }
   </style>
