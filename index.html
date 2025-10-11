@@ -273,29 +273,19 @@
 #view-instalar.view{ display: none !important; }
 #view-instalar.view.active{ display: flex !important; }
 
-   /* Vista MENÚ: más ancha */
-#view-menu .card{
-  max-width: 920px;           /* antes 760px */
-}
-#view-menu .narrow{
-  max-width: 780px;           /* antes 640px */
+  /* Tamaño configurable solo para la vista MENÚ */
+:root{
+  --menu-avatar-size: 180px;  /* cambia aquí el tamaño de la imagen (antes ~150px) */
+  --menu-name-size: 1.7rem;   /* cambia aquí el tamaño del nombre (antes ~1.35rem) */
 }
 
-/* Nombre del comercio (título) más grande */
-#view-menu .c-nombre{
-  font-size: clamp(1.6rem, 2.5vw + 1rem, 2.2rem); /* responde al ancho */
-  letter-spacing: .2px;       /* opcional: más compacto */
-}
-
-/* Opcional: avatar un poco más grande para equilibrar visualmente */
 #view-menu .avatar{
-  width: 180px;
-  height: 180px;
+  width: var(--menu-avatar-size);
+  height: var(--menu-avatar-size);
 }
 
-/* Opcional: video un poco más ancho dentro del menú */
-#view-menu .video-card{
-  width: min(760px, 92vw);    /* antes min(560px, 90vw) */
+#view-menu .c-nombre{
+  font-size: var(--menu-name-size);
 }
    
   </style>
