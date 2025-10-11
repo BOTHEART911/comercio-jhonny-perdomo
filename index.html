@@ -185,6 +185,23 @@
     #view-instalar .tagline{ font-weight:800; color:#111; margin:0; }
     .btn-with-icon{ display:flex; align-items:center; justify-content:center; gap:10px; }
 
+   /* Compactar vistas: sin espacios verticales extra y altura según contenidos */
+.container{ padding-block: 8px; }             /* menos aire arriba/abajo */
+.view{ padding: 0; margin: 0; }               /* sin padding ni márgenes en la vista */
+.view > *{ margin-block: 0; }                 /* elimina márgenes verticales heredados */
+.view > .card{ margin: 8px auto; }            /* aire mínimo entre tarjetas */
+.view > .card:first-child{ margin-top: 0; }   /* sin espacio arriba */
+.view > .card:last-child{ margin-bottom: 0; } /* sin espacio abajo */
+
+/* Las tarjetas se ajustan al contenido sin añadir altura extra */
+.card{ padding-block: 12px; }
+
+/* Contenedores internos sin empujar altura extra */
+.narrow{ margin: 0 auto; }
+
+/* La vista de instalar también se compacta (sin min-height forzado) */
+#view-instalar{ min-height: auto; }
+    
     /* Compactar vistas: sin espacios verticales extra */
 .container{ padding-block: 0 !important; }        /* sin aire arriba/abajo */
 .view{
