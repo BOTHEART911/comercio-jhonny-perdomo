@@ -15,7 +15,7 @@
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <style>
+ <style>
     :root{
       --primary:#007BFF;
       --primary-2:#0056b3;
@@ -185,7 +185,7 @@
     #view-instalar .tagline{ font-weight:800; color:#111; margin:0; }
     .btn-with-icon{ display:flex; align-items:center; justify-content:center; gap:10px; }
 
-    /* Quitar todo espacio vertical entre vistas y tarjetas */
+/* Quitar todo espacio vertical entre vistas y tarjetas */
 .container{
   padding-block: 0 !important;       /* sin aire arriba/abajo en el contenedor */
 }
@@ -249,36 +249,7 @@
   background: #b91c1c !important;     /* rojo más oscuro */
   border-color: #b91c1c !important;
 }
-
-/* ===================== FINAL OVERRIDES PARA EL ESPACIO BAJO EL VIDEO ===================== */
-/* 1) Evita alturas forzadas por height:100% del bloque inicial */
-html, body{ height: auto !important; }
-
-/* 2) Elimina cualquier separación vertical residual entre hermanos directos de cada vista */
-.view > * + *{
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
-
-/* 3) Quita márgenes verticales de elementos tipográficos dentro de vistas */
-.view h1, .view h2, .view h3, .view h4, .view h5, .view h6,
-.view p, .view ul, .view ol, .view dl, .view figure, .view blockquote,
-.view form, .view label, .view textarea, .view input, .view select, .view img{
-  margin-block-start: 0 !important;
-  margin-block-end: 0 !important;
-}
-
-/* 4) Bloques finales: marca y copyright pegados sin salto */
-.view .brand{ margin: 0 auto !important; }
-.view .center.muted{ margin: 0 !important; padding: 0 !important; }
-.brand + .center.muted{ margin-top: 0 !important; }
-
-/* 5) Video y bloque siguiente sin aire */
-#videoCard{ margin: 0 auto !important; }
-#videoCard + .narrow{ margin: 0 auto !important; }
-#videoCard + .narrow .brand,
-#videoCard + .narrow .center.muted{ margin: 0 !important; }
-</style>
+  </style>
 </head>
 <body>
   <!-- Loader -->
