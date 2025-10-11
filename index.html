@@ -249,6 +249,29 @@
   background: #b91c1c !important;     /* rojo más oscuro */
   border-color: #b91c1c !important;
 }
+
+   /* Recorte global: sin espacio vertical extra en vistas */
+.container{ padding-bottom: 0 !important; }
+.view{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* Evitar márgenes colapsados del primer y último elemento en cada vista,
+   manteniendo el espaciado interno normal entre elementos */
+.view > *:first-child{ margin-top: 0 !important; }
+.view > *:last-child{ margin-bottom: 0 !important; }
+
+/* Panel lateral (menú): quita aire arriba/abajo y evita “fantasmas” */
+.overlay .panel{
+  padding-top: 16px !important;
+  padding-bottom: 0 !important;
+}
+.overlay .panel > *:first-child{ margin-top: 0 !important; }
+.overlay .panel > *:last-child{ margin-bottom: 0 !important; }
+
+/* La vista “Instalar” no ocupa espacio si no está activa */
+#view-instalar.view{ display: none !important; }
+#view-instalar.view.active{ display: flex !important; }
   </style>
 </head>
 <body>
