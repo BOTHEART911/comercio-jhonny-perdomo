@@ -1,0 +1,49 @@
+{
+  "id": "./",
+  "name": "PORTAL COMERCIAL",
+  "short_name": "Comercial",
+  "description": "Registro y actualización de comercios, con validación y PWA.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#ffffff",
+  "theme_color": "#007BFF",
+
+  "capture_links": "existing-client-navigate",
+  "launch_handler": { "client_mode": "navigate-existing" },
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+
+  "categories": ["business", "shopping", "productivity"],
+
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/dqqeavica/image/upload/v1759697569/Jhonny_tvexdy.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://res.cloudinary.com/dqqeavica/image/upload/v1759697569/Jhonny_tvexdy.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "Validar Usuario",
+      "short_name": "Validar",
+      "url": "./#view-validar",
+      "description": "Abrir la validación de usuario"
+    },
+    {
+      "name": "Actualizar Datos",
+      "short_name": "Actualizar",
+      "url": "./#view-actualiza",
+      "description": "Abrir la actualización de datos del comercio"
+    }
+  ]
+}
