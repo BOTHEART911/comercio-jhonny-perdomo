@@ -1,8 +1,7 @@
 {
   "id": "./",
   "name": "PORTAL COMERCIAL",
-  "short_name": "Comercial",
-  "description": "Registro y actualización de comercios, con validación y PWA.",
+  "short_name": "Comercio con Jhonny",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -10,38 +9,26 @@
   "theme_color": "#007BFF",
   "capture_links": "existing-client-navigate",
   "launch_handler": { "client_mode": "navigate-existing" },
+
   "prefer_related_applications": false,
   "related_applications": [
     {
       "platform": "webapp",
-      "url": "https://botheart911.github.io/portal-jhonny-perdomo/manifest.webmanifest",
+      "url": "https://botheart911.github.io/comercio-jhonny-perdomo/manifest.webmanifest",
       "id": "./"
     }
   ],
+
   "icons": [
     {
-      "src": "https://res.cloudinary.com/dqqeavica/image/upload/v1759697569/Jhonny_tvexdy.png",
+      "src": "https://res.cloudinary.com/dqqeavica/image/upload/v1760306294/comercio_qrbepe.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://res.cloudinary.com/dqqeavica/image/upload/v1759697569/Jhonny_tvexdy.png",
+      "src": "https://res.cloudinary.com/dqqeavica/image/upload/v1760306294/comercio_qrbepe.png",
       "sizes": "512x512",
       "type": "image/png"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Validar Usuario",
-      "short_name": "Validar",
-      "url": "./#view-validar",
-      "description": "Abrir la validación de usuario"
-    },
-    {
-      "name": "Actualizar Datos",
-      "short_name": "Actualizar",
-      "url": "./#view-actualiza",
-      "description": "Abrir la actualización de datos del comercio"
     }
   ]
 }
