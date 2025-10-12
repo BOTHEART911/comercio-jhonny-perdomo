@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <title>PORTAL COMERCIAL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="https://res.cloudinary.com/dqqeavica/image/upload/v1759697569/Jhonny_tvexdy.png">
+  <link rel="icon" href="https://res.cloudinary.com/dqqeavica/image/upload/v1760306294/comercio_qrbepe.png">
   <link rel="manifest" href="manifest.webmanifest">
 
   <!-- Choices (select mejorado) -->
@@ -313,9 +313,6 @@
 
         <div class="btn-row" style="margin-top:12px;">
           <button class="btn-primary" id="btn-login">Iniciar Sesión</button>
-          <button id="btn-compartir" class="btn-with-icon">
-            <span>Compartir App</span>
-          </button>
         </div>
 
         <img class="brand" alt="Brand" src="https://res.cloudinary.com/dqqeavica/image/upload/v1753538919/BANNER_JHONNY_e0yw7m.png" />
@@ -435,7 +432,7 @@
 
       <div class="card narrow">
         <div class="avatar-wrap">
-          <img id="c-thumb" class="avatar" alt="Comercio" src="https://res.cloudinary.com/dqqeavica/image/upload/v1759798601/noticias_dax8sd.jpg" />
+          <img id="c-thumb" class="avatar" alt="Comercio" src="https://res.cloudinary.com/dqqeavica/image/upload/v1760306294/comercio_qrbepe.png" />
           <div id="c-nombre" class="c-nombre">NOMBRE DEL COMERCIO</div>
         </div>
 
@@ -471,7 +468,7 @@
         </div>
 
         <div class="ovl-header">
-          <img class="ovl-brand" alt="banner" src="https://res.cloudinary.com/dqqeavica/image/upload/v1759696513/Jhonny_y1tslf.gif" />
+          <img class="ovl-brand" alt="banner" src="https://res.cloudinary.com/dqqeavica/image/upload/v1760306838/comercio_rwoe3r.gif" />
         </div>
 
         <h3>Selecciona una opción</h3>
@@ -614,7 +611,7 @@
     <section id="view-instalar" class="view">
       <div class="install-wrap">
         <h2 style="color:var(--primary); text-shadow: 0 2px 2px #031732; margin: 0 0 8px;">PORTAL COMERCIAL</h2>
-        <img class="brand" alt="App" src="https://res.cloudinary.com/dqqeavica/image/upload/v1759696513/Jhonny_y1tslf.gif" />
+        <img class="brand" alt="App" src="https://res.cloudinary.com/dqqeavica/image/upload/v1760306838/comercio_rwoe3r.gif" />
         <p class="tagline">#SoyDeFlandes</p>
         <p class="tagline">#NoParamos</p>
         <p class="tagline">#SiemprePresentes</p>
@@ -876,16 +873,6 @@
       if (el) el.addEventListener('click', ()=> playSoundOnce(SOUNDS.back));
     });
 
-    // Compartir
-    document.getElementById('btn-compartir')?.addEventListener('click', ()=>{
-      const url = "https://tinyurl.com/app-jhonny-perdomo";
-      const txt = "Instala la App 📲 y regístrate en el PORTAL COMERCIAL:\n" + url;
-      if(navigator.clipboard){ navigator.clipboard.writeText(txt).catch(()=>{}); }
-      const enc = encodeURIComponent(txt);
-      const esMovil = /android|iphone|ipad|mobile/i.test(navigator.userAgent||'');
-      window.open((esMovil ? "whatsapp://send?text=" : "https://api.whatsapp.com/send?text=") + enc, "_blank");
-    });
-
     // Especificaciones onChange
     document.getElementById('reg-categoria')?.addEventListener('change', (e)=>{
       document.getElementById('reg-especificaciones').value = specFor(e.target.value) || '';
@@ -1045,11 +1032,7 @@
         <b>Nombre:</b> ${nombre}<br>
         <b>Descripción:</b> ${descripcion}<br>
         <b>Dirección:</b> ${direccion}<br>
-        <b>Ubicación:</b> ${ubicacion || 'Sin Registro'}<br>
         <b>Oferta:</b> ${oferta}<br>
-        <b>Facebook:</b> ${facebook || 'Sin Registro'}<br>
-        <b>Instagram:</b> ${instagram || 'Sin Registro'}<br>
-        <b>TikTok:</b> ${tiktok || 'Sin Registro'}<br>
         <b>WhatsApp:</b> ${whatsapp}<br>
         <b>Teléfono:</b> ${telefono || 'Sin Registro'}<br><br>
         <img class="brand" src="https://res.cloudinary.com/dqqeavica/image/upload/v1753538919/BANNER_JHONNY_e0yw7m.png" alt="">
@@ -1160,11 +1143,7 @@
         <b>Nombre:</b> ${nombre || 'Sin cambios'}<br>
         <b>Descripción:</b> ${descripcion || 'Sin cambios'}<br>
         <b>Dirección:</b> ${direccion || 'Sin cambios'}<br>
-        <b>Ubicación:</b> ${ubicacion || 'Sin cambios'}<br>
         <b>Oferta:</b> ${oferta || 'Sin cambios'}<br>
-        <b>Facebook:</b> ${facebook || 'Sin cambios'}<br>
-        <b>Instagram:</b> ${instagram || 'Sin cambios'}<br>
-        <b>TikTok:</b> ${tiktok || 'Sin cambios'}<br>
         <b>WhatsApp:</b> ${whatsapp || 'Sin cambios'}<br>
         <b>Teléfono:</b> ${telefono || 'Sin cambios'}<br><br>
         <img class="brand" src="https://res.cloudinary.com/dqqeavica/image/upload/v1753538919/BANNER_JHONNY_e0yw7m.png" alt="">
