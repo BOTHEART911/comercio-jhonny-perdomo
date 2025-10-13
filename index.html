@@ -287,6 +287,31 @@
 #view-menu .c-nombre{
   font-size: var(--menu-name-size);
 }
+
+   /* 1) Espacio entre input y botón en Login y Validar Usuario */
+#view-login .card > .btn-row,
+#view-validar .btn-row{
+  margin-top: 12px !important;
+}
+
+/* 2) Espacio entre el último input y el botón Guardar en Registro y Actualización */
+#registro-card .btn-row,
+#view-actualiza .btn-row{
+  margin-top: 14px !important;
+}
+
+/* 3) Vista Menú: mitad del espacio entre botones */
+#view-menu .btn-row{
+  gap: 6px !important; /* antes 12px */
+}
+
+/* 4) Overlay del Menú: mitad del espacio entre botones */
+.overlay .panel{
+  gap: 7px !important; /* antes 14px */
+}
+.overlay .panel .menu-btn{
+  margin: 2px 0 !important; /* antes 4px 0 */
+}
    
   </style>
 </head>
