@@ -369,10 +369,15 @@
             </a>
           </div>
 
-          <!-- 8. Oferta -->
-          <label>Oferta del Comercio</label>
-          <p class="desc">Describe puntualmente la oferta para usuarios activos de la App (requerido).</p>
-          <textarea id="reg-oferta" rows="3" placeholder="Describe la oferta aquí"></textarea>
+          <!-- 8. Oferta Premium -->
+          <label>Oferta del Comercio para Usuarios Premium</label>
+          <p class="desc">Describe la oferta para usuarios Premium (Requerido).</p>
+          <textarea id="reg-oferta-premium" rows="3" placeholder="Describe la oferta Premium aquí"></textarea>
+
+          <!-- 9. Oferta Estándar -->
+          <label>Oferta del Comercio para Usuarios Estándar</label>
+          <p class="desc">Describe la oferta para usuarios Estándar (Requerido).</p>
+          <textarea id="reg-oferta-estandar" rows="3" placeholder="Describe la oferta Estándar aquí"></textarea>
 
           <!-- 9. Facebook -->
           <label>Facebook</label>
@@ -442,7 +447,8 @@
           <p><b>NIT:</b> <span id="c-nit">-</span></p>
           <p><b>Categoría:</b> <span id="c-categoria">-</span></p>
           <p><b>Descripción:</b> <span id="c-descripcion">-</span></p>
-          <p><b>Oferta:</b> <span id="c-oferta">-</span></p>
+          <p><b>Oferta Premium:</b> <span id="c-oferta-premium">-</span></p>
+          <p><b>Oferta Estándar:</b> <span id="c-oferta-estandar">-</span></p>
           <p><b>WhatsApp:</b> <span id="c-whatsapp">-</span></p>
         </div>
       </div>
@@ -546,9 +552,13 @@
             </a>
           </div>
 
-          <label>Oferta del Comercio</label>
+          label>Oferta del Comercio para Usuarios Premium</label>
           <p class="desc">Opcional.</p>
-          <textarea id="upd-oferta" rows="3" placeholder="Sin cambios"></textarea>
+          <textarea id="upd-oferta-premium" rows="3" placeholder="Sin cambios"></textarea>
+
+          <label>Oferta del Comercio para Usuarios Estándar</label>
+          <p class="desc">Opcional.</p>
+          <textarea id="upd-oferta-estandar" rows="3" placeholder="Sin cambios"></textarea>
 
           <label>Facebook</label>
           <p class="desc">Opcional.</p>
@@ -892,7 +902,8 @@
       document.getElementById('c-nit').textContent = d.documento || '';
       document.getElementById('c-categoria').textContent = d.categoria || '';
       document.getElementById('c-descripcion').textContent = d.descripcion || '';
-      document.getElementById('c-oferta').textContent = d.oferta || '';
+      document.getElementById('c-oferta-premium').textContent = d.ofertaPremium || '';
+      document.getElementById('c-oferta-estandar').textContent = d.ofertaEstandar || '';
       document.getElementById('c-whatsapp').textContent = d.whatsapp || '';
     }
 
@@ -910,7 +921,8 @@
             nombre: res.nombre || '',
             descripcion: res.descripcion || '',
             imagen: res.imagen || '',
-            oferta: res.oferta || '',
+            ofertaPremium: res.ofertaPremium || '',
+            ofertaEstandar: res.ofertaEstandar || '',
             direccion: res.direccion || '',
             ubicacion: res.ubicacion || '',
             facebook: res.facebook || '',
@@ -967,7 +979,8 @@
             nombre: res.nombre || '',
             descripcion: res.descripcion || '',
             imagen: res.imagen || '',
-            oferta: res.oferta || '',
+            ofertaPremium: res.ofertaPremium || '',
+            ofertaEstandar: res.ofertaEstandar || '',
             direccion: res.direccion || '',
             ubicacion: res.ubicacion || '',
             facebook: res.facebook || '',
@@ -1006,7 +1019,8 @@
       const descripcion = (document.getElementById('reg-descripcion').value || '').trim();
       const direccion = (document.getElementById('reg-direccion').value || '').trim();
       const ubicacion = (document.getElementById('reg-ubicacion').value || '').trim();
-      const oferta = (document.getElementById('reg-oferta').value || '').trim();
+      const ofertaPremium = (document.getElementById('reg-oferta-premium').value || '').trim();
+      const ofertaEstandar = (document.getElementById('reg-oferta-estandar').value || '').trim();
       const facebook = (document.getElementById('reg-facebook').value || '').trim();
       const instagram = (document.getElementById('reg-instagram').value || '').trim();
       const tiktok = (document.getElementById('reg-tiktok').value || '').trim();
@@ -1019,7 +1033,8 @@
       if (!descripcion){ return Swal.fire({ icon:'warning', title:'Descripción requerida' }); }
       if (!regFotoDataUrl){ return Swal.fire({ icon:'warning', title:'Imagen requerida' }); }
       if (!direccion){ return Swal.fire({ icon:'warning', title:'Dirección requerida' }); }
-      if (!oferta){ return Swal.fire({ icon:'warning', title:'Oferta requerida' }); }
+      if (!ofertaPremium){ return Swal.fire({ icon:'warning', title:'Oferta Premium requerida' }); }
+      if (!ofertaEstandar){ return Swal.fire({ icon:'warning', title:'Oferta Estándar requerida' }); }
       if (!waRegex.test(whatsapp)){ return Swal.fire({ icon:'warning', title:'WhatsApp inválido', text:'Debe tener 10 dígitos.' }); }
       if (ubicacion && !urlMapsOk(ubicacion)) return Swal.fire({ icon:'warning', title:'Ubicación inválida' });
       if (facebook && !urlFacebookOk(facebook)) return Swal.fire({ icon:'warning', title:'Facebook inválido' });
@@ -1032,7 +1047,8 @@
         <b>Nombre:</b> ${nombre}<br>
         <b>Descripción:</b> ${descripcion}<br>
         <b>Dirección:</b> ${direccion}<br>
-        <b>Oferta:</b> ${oferta}<br>
+        <b>Oferta Premium:</b> ${ofertaPremium}<br>
+        <b>Oferta Estándar:</b> ${ofertaEstandar}<br>
         <b>WhatsApp:</b> ${whatsapp}<br>
         <b>Teléfono:</b> ${telefono || 'Sin Registro'}<br><br>
         <img class="brand" src="https://res.cloudinary.com/dqqeavica/image/upload/v1753538919/BANNER_JHONNY_e0yw7m.png" alt="">
@@ -1050,7 +1066,7 @@
         const payload = {
           documento, categoria, especificaciones, nombre, descripcion,
           foto: regFotoDataUrl, urlImagen: '',
-          direccion, ubicacion: opt(ubicacion), oferta,
+          direccion, ubicacion: opt(ubicacion), ofertaPremium, ofertaEstandar,
           facebook: opt(facebook), instagram: opt(instagram), tiktok: opt(tiktok),
           whatsapp, telefono: opt(telefono)
         };
@@ -1058,7 +1074,7 @@
         if (r && r.success){
           currentComercio = {
             documento, categoria, especificaciones, nombre, descripcion,
-            imagen: regFotoDataUrl, oferta, direccion,
+            imagen: regFotoDataUrl, ofertaPremium, ofertaEstandar, direccion,
             ubicacion: opt(ubicacion), facebook: opt(facebook), instagram: opt(instagram), tiktok: opt(tiktok),
             whatsapp, telefono: opt(telefono), estado: 'ACTIVO'
           };
@@ -1107,7 +1123,7 @@
     async function prepararActualiza(){
       if(!currentComercio) return;
       document.getElementById('upd-documento').value = currentComercio.documento || '';
-      ['upd-categoria','upd-especificaciones','upd-nombre','upd-descripcion','upd-direccion','upd-ubicacion','upd-oferta','upd-facebook','upd-instagram','upd-tiktok','upd-whatsapp','upd-telefono']
+     ['upd-categoria','upd-especificaciones','upd-nombre','upd-descripcion','upd-direccion','upd-ubicacion','upd-oferta-premium','upd-oferta-estandar','upd-facebook','upd-instagram','upd-tiktok','upd-whatsapp','upd-telefono']
         .forEach(id=>{ const el = document.getElementById(id); if(!el) return; el.value = ''; });
       if (choicesUpdCat) choicesUpdCat.setChoiceByValue('');
       updFotoDataUrl=''; const p = document.getElementById('upd-preview'); if (p){ p.src=''; p.style.display='none'; }
@@ -1124,7 +1140,8 @@
       const descripcion = (document.getElementById('upd-descripcion').value || '').trim();
       const direccion = (document.getElementById('upd-direccion').value || '').trim();
       const ubicacion = (document.getElementById('upd-ubicacion').value || '').trim();
-      const oferta = (document.getElementById('upd-oferta').value || '').trim();
+      const ofertaPremium = (document.getElementById('upd-oferta-premium').value || '').trim();
+      const ofertaEstandar = (document.getElementById('upd-oferta-estandar').value || '').trim();
       const facebook = (document.getElementById('upd-facebook').value || '').trim();
       const instagram = (document.getElementById('upd-instagram').value || '').trim();
       const tiktok = (document.getElementById('upd-tiktok').value || '').trim();
@@ -1143,7 +1160,8 @@
         <b>Nombre:</b> ${nombre || 'Sin cambios'}<br>
         <b>Descripción:</b> ${descripcion || 'Sin cambios'}<br>
         <b>Dirección:</b> ${direccion || 'Sin cambios'}<br>
-        <b>Oferta:</b> ${oferta || 'Sin cambios'}<br>
+        <b>Oferta Premium:</b> ${ofertaPremium || 'Sin cambios'}<br>
+        <b>Oferta Estándar:</b> ${ofertaEstandar || 'Sin cambios'}<br>
         <b>WhatsApp:</b> ${whatsapp || 'Sin cambios'}<br>
         <b>Teléfono:</b> ${telefono || 'Sin cambios'}<br><br>
         <img class="brand" src="https://res.cloudinary.com/dqqeavica/image/upload/v1753538919/BANNER_JHONNY_e0yw7m.png" alt="">
@@ -1161,7 +1179,8 @@
       if (descripcion) body.descripcion = descripcion;
       if (direccion) body.direccion = direccion;
       if (ubicacion) body.ubicacion = ubicacion;
-      if (oferta) body.oferta = oferta;
+      if (ofertaPremium) body.ofertaPremium = ofertaPremium;
+      if (ofertaEstandar) body.ofertaEstandar = ofertaEstandar;
       if (facebook) body.facebook = facebook;
       if (instagram) body.instagram = instagram;
       if (tiktok) body.tiktok = tiktok;
@@ -1178,7 +1197,8 @@
           if (descripcion) currentComercio.descripcion = descripcion;
           if (direccion) currentComercio.direccion = direccion;
           if (ubicacion) currentComercio.ubicacion = ubicacion;
-          if (oferta) currentComercio.oferta = oferta;
+          if (ofertaPremium) currentComercio.ofertaPremium = ofertaPremium;
+          if (ofertaEstandar) currentComercio.ofertaEstandar = ofertaEstandar;
           if (facebook) currentComercio.facebook = facebook;
           if (instagram) currentComercio.instagram = instagram;
           if (tiktok) currentComercio.tiktok = tiktok;
@@ -1212,7 +1232,10 @@
         }
         const st = String(r.estado || '').toUpperCase();
         if (st === 'ACTIVO'){
-          await Swal.fire({ icon:'success', title:'USUARIO EXISTENTE', text:'estado ACTIVO', timer:5000, showConfirmButton:false });
+          const h = String(r.colH || '').toUpperCase();
+          const isPremium = (h === 'FLANDES' || h === 'A LA ESPERA');
+          const tipo = isPremium ? 'Usuario Premium' : 'Usuario Estándar';
+          await Swal.fire({ icon:'success', title:'USUARIO EXISTENTE', text: `${tipo} - estado ACTIVO`, timer:5000, showConfirmButton:false });
         }else if (st === 'INACTIVO'){
           await Swal.fire({ icon:'info', title:'USUARIO EXISTENTE', text:'estado INACTIVO', timer:5000, showConfirmButton:false });
         }else{
